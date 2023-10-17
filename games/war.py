@@ -158,7 +158,7 @@ class war:
 
     def check_win(self, player:int, value:bool):
         #print("Player ", player, "wins!")
-        #print("war turns: ", self.num_turns,  "transitions:", self.transitions, "last: ", 0)
+        print("war turns: ", self.num_turns,  "transitions:", self.transitions, "last: ", 0)
         self.game_over = value
         
     
