@@ -1,0 +1,3 @@
+The Fisher-Yates algorithm is located in /games/trash.py and the /games/war.py files on lines 48 and 35 respectively. 
+The function for a player's turn in the game of Trash is located in /games/trash.py file on line 152 under the function 
+play_turn.
