@@ -13,6 +13,7 @@ class trash:
     def __init__(self,r_file_path: str) -> None:
 
         """Initializes the game setup."""
+        self.r_gen = self.rand_generator(r_file_path)
         self.r_file_path = r_file_path  # turn the list into an iterator
         self.discard_deck = [] # Deck where players discard cards
         self.draw_deck = [] # Deck from which players draw cards

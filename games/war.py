@@ -8,6 +8,7 @@ class war:
 
     def __init__(self,r_file_path: str) -> None:
         
+        self.r_gen = self.rand_generator(r_file_path)
         self.r_file_path = r_file_path  # turn the list into an iterator
         self.player1 = {'deck':[], 'winnings_deck': []}
         self.player2 = {'deck':[], 'winnings_deck': []}
