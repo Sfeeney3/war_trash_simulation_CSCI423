@@ -3,7 +3,9 @@
 
 import sys
 import games.war as war
+import games.war_mod as war_mod
 import games.trash as trash
+import games.trash_mod as trash_mod
 
 def main():
     if len(sys.argv) != 3:
@@ -27,7 +29,7 @@ def main():
                 war_game.war_turn()
 
         elif game_type == "trash":
-            trash_game= trash.trash(r_file_path)
+            trash_game= trash_mod.trash(r_file_path)
             
 
             trash_game.play_game()
