@@ -21,6 +21,8 @@ class trash:
         self.player1['visibility'] = ['X'] * self.player1['array_count'][-1]
         self.player2['visibility'] = ['X'] * self.player2['array_count'][-1]
 
+        self.all_transitions = []
+
         self.num_turns = 0        # Counter for number of turns taken
         self.transitions = 0      # Counter for transitions in lead
         self.winner = []          # Stores the winner
@@ -195,6 +197,7 @@ class trash:
         current_leader = "player" if len(player['array_count']) < len(opponent['array_count']) else "opponent"
         if initial_leader != current_leader:
             self.transitions += 1
+            self.all_transitions.append((self.num_turns, current_leader))
 
 
 
@@ -222,7 +225,23 @@ class trash:
             self.winner = "Player 1"
         else:
             self.winner = "Player 2"
-    
+
+
+    def print_simulation_results(self):
+        N = self.num_turns
+        T = self.transitions
+        
+        # Determine L, the fraction of N when the last transition occurred
+        if self.all_transitions:  # make sure there were transitions
+            last_transition_turn = self.all_transitions[-1][0]
+            L = last_transition_turn / N
+        else:
+            L = 0
+
+        # Print the results in the desired format
+        print(f"OUTPUT trash turns {N} transitions {T} last {L:.5f}")
+
+
     def play_game_check(self):
         
         """Play the game for a set number of rounds for testing purposes."""
