@@ -31,21 +31,23 @@ class war:
 
             c = c+1
         return deck
+    
+    def rand_generator(self, file_path):
+        """Generator function to yield one random value at a time."""
+        with open(file_path, 'r') as file:
+            for line in file:
+                yield float(line.strip())
 
-    def shuffle_cards(self,deck:list):
 
-        #Fisher-Yates for shuffling
-
-       
+    def shuffle_cards(self, deck: list):
+        """Shuffles cards using the Fisher-Yates algorithm."""
         n = len(deck)
 
-        
-        # Open the file for reading random values
-        with open(self.r_file_path, 'r') as file:
-            for c in range(n):
-                r = float(file.readline().strip())  # Read the next random value from the file
-                p = int((r * (n - c)) + c)
-                deck[c], deck[p] = deck[p], deck[c]
+        for c in range(n):
+            r = next(self.r_gen)  # Get the next random value from the generator
+            p = int((r * (n - c)) + c)
+            deck[c], deck[p] = deck[p], deck[c]
+
         return deck
 
 
