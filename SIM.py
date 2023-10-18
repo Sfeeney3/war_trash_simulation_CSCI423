@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+
+
 import sys
 import games.war as war
 import games.trash as trash
@@ -10,16 +13,30 @@ def main():
     game_type = sys.argv[1]
     file_path = sys.argv[2]
 
+    # Read the random values from the file
+    with open(file_path, 'r') as file:
+        r_vals = [float(line.strip()) for line in file]
     try:
+
         if game_type == "war":
-            N, T, L = war.war(file_path)
+
+            war_game = war.war(r_vals)
+
+            while war_game.game_over == False:
+
+                war_game.war_turn()
+
         elif game_type == "trash":
-            N, T, L = trash.trash(file_path)
+            trash_game= trash.trash(r_vals)
+            
+
+            trash_game.play_game()
+            print(f"OUTPUT trash turns: {trash_game.num_turns} transitions: {trash_game.transitions} transitions!")
         else:
             print(f"Invalid game type: {game_type}. Choose either 'war' or 'trash'.")
             sys.exit(1)
 
-        print(f"OUTPUT {game_type} turns {N} transitions {T} last {L:.5f}")
+
 
     except IOError as e:
         # Printing a descriptive error message

@@ -10,10 +10,10 @@ class trash:
 
     """This class implements the Trash card game."""
 
-    def __init__(self,r_val) -> None:
+    def __init__(self,r_vals) -> None:
 
         """Initializes the game setup."""
-
+        self.rand = iter(r_vals)  # turn the list into an iterator
         self.discard_deck = [] # Deck where players discard cards
         self.draw_deck = [] # Deck from which players draw cards
         self.player1 = {'deck': [], 'visibility': [], 'array_count': [x for x in range(1,11)]}
@@ -53,7 +53,7 @@ class trash:
         n = len(deck)
 
         for c in range(n):
-            r = random.uniform(.01,.999) #works for now
+            r = next(self.rand)  # get the next random value from the file
             p = int((r*(n-c))+c)
 
 

@@ -6,9 +6,9 @@ import numpy as np
 
 class war:
 
-    def __init__(self,r_val) -> None:
+    def __init__(self,r_vals) -> None:
         
-        self.rand = r_val
+        self.rand = iter(r_vals)  # turn the list into an iterator
         self.player1 = {'deck':[], 'winnings_deck': []}
         self.player2 = {'deck':[], 'winnings_deck': []}
         self.num_turns = 0
@@ -40,7 +40,8 @@ class war:
         n = len(deck)
 
         for c in range(n):
-            r = random.uniform(.01,.999) #works for now
+            #r = random.uniform(.01,.999) #works for now
+            r = next(self.rand)  # get the next random value from the file
             p = int((r*(n-c))+c)
             #print(p)
             #print(c)
@@ -158,7 +159,9 @@ class war:
 
     def check_win(self, player:int, value:bool):
         #print("Player ", player, "wins!")
-        print("war turns: ", self.num_turns,  "transitions:", self.transitions, "last: ", 0)
+        #print("war turns: ", self.num_turns,  "transitions:", self.transitions, "last: ", 0)
+        last_transition = 0 if not self.transitions else (len(self.winner) - self.winner[::-1].index(self.winner[-1])) / self.num_turns
+        print(f"OUTPUT war turns: {self.num_turns} transitions: {self.transitions} last: {last_transition:.5f}")
         self.game_over = value
         
     
