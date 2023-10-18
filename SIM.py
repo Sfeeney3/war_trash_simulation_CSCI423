@@ -13,21 +13,21 @@ def main():
     game_type = sys.argv[1]
     file_path = sys.argv[2]
 
-    # Read the random values from the file
-    with open(file_path, 'r') as file:
-        r_vals = [float(line.strip()) for line in file]
+    # Just store the file path; don't read the values yet
+    r_file_path = file_path
+
     try:
 
         if game_type == "war":
 
-            war_game = war.war(r_vals)
+            war_game = war.war(r_file_path)
 
             while war_game.game_over == False:
 
                 war_game.war_turn()
 
         elif game_type == "trash":
-            trash_game= trash.trash(r_vals)
+            trash_game= trash.trash(r_file_path)
             
 
             trash_game.play_game()

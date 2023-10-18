@@ -6,9 +6,9 @@ import numpy as np
 
 class war:
 
-    def __init__(self,r_vals) -> None:
+    def __init__(self,r_file_path: str) -> None:
         
-        self.rand = iter(r_vals)  # turn the list into an iterator
+        self.r_file_path = r_file_path  # turn the list into an iterator
         self.player1 = {'deck':[], 'winnings_deck': []}
         self.player2 = {'deck':[], 'winnings_deck': []}
         self.num_turns = 0
@@ -39,18 +39,14 @@ class war:
        
         n = len(deck)
 
-        for c in range(n):
-            #r = random.uniform(.01,.999) #works for now
-            r = next(self.rand)  # get the next random value from the file
-            p = int((r*(n-c))+c)
-            #print(p)
-            #print(c)
-
-            #constant time complexity for this operation
-            deck[c], deck[p] = deck[p], deck[c]
-
-            #c = c+1
-        return deck    
+        
+        # Open the file for reading random values
+        with open(self.r_file_path, 'r') as file:
+            for c in range(n):
+                r = float(file.readline().strip())  # Read the next random value from the file
+                p = int((r * (n - c)) + c)
+                deck[c], deck[p] = deck[p], deck[c]
+        return deck
 
 
 
